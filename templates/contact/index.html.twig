@@ -1,0 +1,20 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}İletişim{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-md-center mt-5">
+        <div class="col-md-5">
+                {% for message in app.flashes('contactSubitedSuccess') %}
+                <div class="alert alert-success">
+                    <p class="h6 text-center">{{ message }} <i class="fas fa-check-double"></i></p>
+                </div>
+                {% endfor %}
+            <p class="h3 text-center">İletişim</p>
+            <hr>
+            {{ form(contact) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

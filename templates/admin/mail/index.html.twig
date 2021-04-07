@@ -1,0 +1,84 @@
+{% extends 'admin/base.html.twig' %}
+{% block header %}
+    {% include 'admin/inc/header.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-5">
+                {% for flashMessage in app.session.flashbag.get('emailsuccess') %}
+
+                    <div class="alert alert-success">
+                        <p class="text-center h5">
+                            {{ flashMessage }}
+                        </p>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row justify-content-md-center mb-3">
+            <div class="col-md-8">
+                <p class="text-center h4 mb-3">Hızlı Erişim</p>
+                <hr>
+            </div>
+        </div>
+        <div class="row justify-content-md-center mb-5">
+            <div class="col-md-2 d-grid gap-2">
+                <a href="{{ url('contact_send') }}" class="btn btn-outline-primary">Yeni İleti <i class="fas fa-envelope-open-text"></i></a>
+            </div>
+            <div class="col-md-2 d-grid gap-2">
+                <a href="" class="btn btn-outline-primary">Tüm Postalar <i class="fas fa-mail-bulk"></i></a>
+            </div>
+            <div class="col-md-2 d-grid gap-2">
+                <a href="" class="btn btn-outline-primary">Yanıtlananlar <i class="fas fa-reply-all"></i></a>
+            </div>
+            <div class="col-md-2 d-grid gap-2">
+                <a href="" class="btn btn-outline-primary">Okunanlar <i class="fab fa-readme"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center h4 mb-3">Oluşturulan Kısaltmalar</p>
+                <hr>
+                <table class="table table-responsive table-hover text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">E-Mail</th>
+                        <th scope="col">İsim Soyisim</th>
+                        <th scope="col">Mesaj</th>
+                        <th scope="col">Tarih</th>
+                        <th scope="col">Okundu/Okunmadı</th>
+                        <th scope="col">Yanıtla</th>
+                        <th scope="col">Sil</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for mail in contact %}
+                        <tr>
+                            <th scope="row">#</th>
+                            <th>{{ mail.email }}</th>
+                            <td>{{ mail.namesurname }}</td>
+                            <td>{{ mail.message[0:25] }}</td>
+                            <td>{{ mail.createdat | date('d-m-Y') }}</td>
+                            <td>
+                                {% if mail.isreading == 0 %}
+                                    <a href="{{ url('contact_show',{id:mail.id}) }}" class="btn btn-secondary btn-sm">Okunmadı / Göster <i class="fas fa-eye"></i></a>
+                                {% else %}
+                                    <a href="{{ url('contact_show',{id:mail.id}) }}" class="btn btn-success btn-sm">Okundu / Göster <i class="fas fa-eye"></i></a>
+                                {% endif %}
+                            </td>
+                            <td><a href="{{ url('contact_send')}}?mail={{ mail.email }}&id={{ mail.id }}" class="btn btn-secondary btn-sm">Yanıtla <i class="fas fa-reply"></i></a></td>
+                            <td><a href="{{ url('contact_delete',{id:mail.id}) }}" class="btn btn-danger btn-sm">Sil <i class="fas fa-trash"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

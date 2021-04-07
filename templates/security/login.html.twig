@@ -1,0 +1,42 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Kayıt ol{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <form method="post">
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <h1 class="h3 mb-3 font-weight-normal text-center">Giriş Yap</h1>
+                <div class="row mb-3">
+                    <label for="inputEmail">E-Mail</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                </div>
+                <div class="row mb-3">
+                <label for="inputPassword">Şifre</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 d-grid gap-2">
+                        <a href="/register" class="btn btn-primary">Kayıt ol <i class="fas fa-user-plus"></i></a>
+                    </div>
+                    <div class="col-md-6 d-grid gap-2">
+                        <button class="btn btn-success" type="submit">
+                            Giriş Yap <i class="fas fa-sign-in-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'admin/base.html.twig' %}
+{% block header %}
+    {% include 'admin/inc/header.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-5">
+                <p class="text-center h2 mb-3">Url Düzenle</p>
+                <hr>
+                {{ form(urlform) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

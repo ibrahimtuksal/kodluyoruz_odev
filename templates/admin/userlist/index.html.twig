@@ -1,0 +1,81 @@
+{% extends 'admin/base.html.twig' %}
+{% block header %}
+    {% include 'admin/inc/header.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-5">
+                {% for flashMessage in app.session.flashbag.get('emailsuccess') %}
+
+                    <div class="alert alert-success">
+                        <p class="text-center h5">
+                            {{ flashMessage }}
+
+                        </p>
+                    </div>
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('usercreated') %}
+                    <div class="alert alert-success">
+                        <p class="text-center h5">
+                            {{ flashMessage }}
+                        </p>
+                    </div>
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('useredited') %}
+                    <div class="alert alert-success">
+                        <p class="text-center h5">
+                            {{ flashMessage }}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row justify-content-md-center mb-3">
+            <div class="col-md-8">
+                <p class="text-center h4 mb-3">Hızlı Erişim</p>
+                <hr>
+            </div>
+        </div>
+        <div class="row justify-content-md-center mb-5">
+            <div class="col-md-2 d-grid gap-2">
+                <a href="{{ url('user_add') }}" class="btn btn-danger">Admin Oluştur <i class="fas fa-user-shield"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center h4 mb-3">Kullanıcılar</p>
+                <hr>
+                <table class="table table-responsive table-hover text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">E-Mail</th>
+                        <th scope="col">Aktif/Pasif</th>
+                        <th scope="col">Düzenle</th>
+                        <th scope="col">Sil</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <th scope="row">#</th>
+                            <th>{{ user.email }}</th>
+                            {% if user.isactive == 1 %}
+                                <td><a data-user-id="{{user.id}}" class="btn btn-warning btn-sm active-passive-btn" data-is-active="false"><span>Pasifleştir</span> <i class="fas fa-toggle-off on-off-icon"></i></a></td>
+                                {% else %}
+                                <td><a data-user-id="{{user.id}}" class="btn btn-success btn-sm active-passive-btn" data-is-active="true"><span>Aktifleştir</span> <i class="fas fa-toggle-on on-off-icon"></i></a></td>
+                            {% endif %}
+                            <td><a href="{{ url('user_edit',{id:user.id}) }}" class="btn btn-primary btn-sm">Düzenle <i class="fas fa-pencil-alt"></i></a></td>
+                            <td><a href="{{ url('user_delete',{id:user.id}) }}" class="btn btn-danger btn-sm">Sil <i class="fas fa-trash"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

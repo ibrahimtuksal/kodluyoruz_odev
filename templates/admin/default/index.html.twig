@@ -1,0 +1,41 @@
+{% extends 'admin/base.html.twig' %}
+{% block header %}
+    {% include 'admin/inc/header.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-center h2">İstatistikler</p>
+            <hr>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-5">
+            <p class="text-center h5">En Çok Tıklanan Kısaltmalar</p>
+            <ul class="list-group">
+                {% for urls in url %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ urls.url }}
+                    <span class="badge bg-primary rounded-pill">{{ urls.clickcount }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-5">
+            <p class="text-center h5">En Çok Url Oluşturan Kullanıcılar</p>
+            <ul class="list-group">
+                {% for users in user %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ users.email }}
+                        <span class="badge bg-primary rounded-pill">{{ users.urlcount }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

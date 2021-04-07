@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+{% block header %}
+    {% include 'admin/inc/header.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center h2 mb-3">Oluşturulan Kısaltmalar</p>
+                <hr>
+                <table class="table table-responsive table-hover text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Url</th>
+                        <th scope="col">Hash Kodu</th>
+                        <th scope="col">Oluşturan</th>
+                        <th scope="col">Oluşturulduğu Tarih</th>
+                        <th scope="col">İstatislikler</th>
+                        <th scope="col">Aktif/Pasif</th>
+                        <th scope="col">Düzenle</th>
+                        <th scope="col">Sil</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for urlget in url %}
+                    <tr>
+                        <th scope="row">#</th>
+                        <th>{{ urlget.url }}</th>
+                        <td>{{ urlget.urlhash }}</td>
+                        {% if urlget.userid == 0 %}
+                            <td>Anonim</td>
+                        {% else %}
+                            <td>{{ helpers.getUser(urlget.userId).email }}</td>
+                        {% endif %}
+                        <td>{{ urlget.createdat | date('d-m-Y') }}</td>
+                        <td><a href="{{ url('url_statistics',{id:urlget.id}) }}" class="btn btn-info btn-sm">İstatislikler <i class="fas fa-align-center"></i></a></td>
+                        <td>
+                                {% if urlget.isactive == TRUE %}
+                                    <a href="{{ url('url_operation',{id:urlget.id}) }}" class="btn btn-warning btn-sm">Pasif Yap <i class="fas fa-toggle-off"></i></a>
+                                {% else %}
+                                    <a href="{{ url('url_operation',{id:urlget.id}) }}" class="btn btn-success btn-sm">Aktif Yap <i class="fas fa-toggle-on"></i></a>
+                                {% endif %}
+                        </td>
+                        <td><a href="{{ url('url_edit',{id:urlget.id}) }}" class="btn btn-primary btn-sm">Düzenle <i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a href="{{ url('url_delete',{id:urlget.id}) }}" class="btn btn-danger btn-sm">Sil <i class="fas fa-trash"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,33 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <div class="container mt-5">
+        <div class="row justify-content-md-center">
+            <div class="col-md-4">
+                <h1 class="h3 mb-3 font-weight-normal text-center">Kayıt ol</h1>
+                {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Şifre'
+                }) }}
+                {{ form_row(registrationForm.agreeTerms,{label:'Kullanım Sözleşmesi'}) }}
+
+               <div class="row mt-2">
+                   <div class="col-md-6 d-grid gap-2">
+                       <a href="/login" class="btn btn-primary">Giriş Yap <i class="fas fa-sign-in-alt"></i></a>
+                   </div>
+                   <div class="col-md-6 d-grid gap-2">
+                       <button type="submit" class="btn btn-success">Kayıt ol <i class="fas fa-user-plus"></i></button>
+                   </div>
+               </div>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

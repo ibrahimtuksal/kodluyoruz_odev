@@ -1,0 +1,26 @@
+<div class="container mt-2">
+    <div class="row justify-content-md-center">
+        <div class="col-md-7 text-center">
+            <p class="text-center display-5">Kullanıcı Paneli</p>
+            <p class="h3 text-center">
+                Merhaba
+                <br>
+                {{ app.user.username }}
+                <br>
+                <a href="/logout" class="btn btn-danger mt-3"><i class="fas fa-power-off"></i></a>
+            <hr>
+            </p>
+        </div>
+    </div>
+    <div class="row justify-content-md-center mb-5">
+        <div class="col-md-2 d-grid gap-2 mb-5">
+            <a href="{{ url('profile') }}" class="btn btn-dark"><i class="fas fa-home"></i></a>
+        </div>
+        <div class="col-md-2 d-grid gap-2 mb-5">
+            <a href="{{ url('profile_settings') }}" class="btn btn-dark">Profil Ayarları <i class="fas fa-cog"></i></a>
+        </div>
+        <div class="col-md-2 d-grid gap-2 mb-5">
+            <a href="{{ url('user_stat') }}" class="btn btn-dark">İstatisliklerin <i class="fas fa-cog"></i></a>
+        </div>
+    </div>
+</div>

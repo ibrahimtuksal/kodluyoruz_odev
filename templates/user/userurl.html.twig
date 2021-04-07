@@ -1,0 +1,41 @@
+{% extends 'user/base.html.twig' %}
+{% block header %}
+    {% include 'user/inc/header.html.twig' %}
+{% endblock %}
+{% block title %}{{ app.user.username }} | Kullanıcı Paneli{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center h2">İstatistikler</p>
+                <hr>
+
+
+
+                <table class="table table-responsive table-hover text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Url</th>
+                        <th scope="col">Oluşturduğun Tarih</th>
+                        <th scope="col">Tıklanma Sayısı</th>
+                        <th scope="col">İstatislik</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for url in userurl %}
+                    <tr>
+                        <td>#</td>
+                        <td>{{ url.url }}</td>
+                        <td>{{ url.createdat | date("m/d/Y h:i:s", "Europe/Istanbul") }}</td>
+                        <td><span class="badge bg-danger">{{ url.clickcount }}</span></td>
+                        <td><a href="{{ url('url_user_statistics',{id:url.id}) }}" class="btn btn-sm btn-primary">İstatislikler <i class="fas fa-align-center"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

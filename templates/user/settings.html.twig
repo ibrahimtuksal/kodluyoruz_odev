@@ -1,0 +1,21 @@
+{% extends 'user/base.html.twig' %}
+{% block header %}
+    {% include 'user/inc/header.html.twig' %}
+{% endblock %}
+{% block title %}{{ app.user.username }} | Kullanıcı Paneli{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-5">
+                <p class="display-6 text-center">Profil Güncelle</p>
+                <hr>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-5">
+                {{ form(change) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'admin/base.html.twig' %}
+{% block header %}
+    {% include 'admin/inc/header.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-5">
+                <p class="h5 text-center">{{ mailadress }}</p>
+                    {{ form(reply) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
